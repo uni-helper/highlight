@@ -1,0 +1,96 @@
+{
+  "name": "@uni-helper/highlight",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@12.5.1",
+  "description": "Lightweight code highlighting component for uni-app, powered by sugar-high",
+  "author": "FliPPeDround <https://github.com/FliPPeDround>",
+  "license": "MIT",
+  "funding": "https://afdian.com/a/flippedround",
+  "homepage": "https://github.com/uni-helper/highlight#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uni-helper/highlight.git"
+  },
+  "bugs": "https://github.com/uni-helper/highlight/issues",
+  "keywords": [
+    "uni-app",
+    "uniapp",
+    "highlight",
+    "syntax-highlighting",
+    "code-highlight",
+    "sugar-high",
+    "mini-program",
+    "component"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/code.vue.d.ts",
+      "default": "./src/code.vue"
+    },
+    "./theme": "./src/theme.ts",
+    "./tokenize": "./src/tokenize.ts",
+    "./package.json": "./package.json"
+  },
+  "main": "./src/code.vue",
+  "types": "./src/code.vue.d.ts",
+  "files": [
+    "skills",
+    "src"
+  ],
+  "scripts": {
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "prepack": "publint",
+    "release": "bumpp",
+    "test": "vitest run",
+    "typecheck": "tsc && vue-tsc --noEmit",
+    "prepare": "git config core.hooksPath .githooks && simple-git-hooks"
+  },
+  "scripts-info": {
+    "lint": "Check for code style issues",
+    "prepack": "Validate package exports before publishing",
+    "release": "Bump version and publish a release",
+    "test": "Run the test suite",
+    "typecheck": "Check types",
+    "prepare": "Set up git hooks and skills"
+  },
+  "peerDependencies": {
+    "skills-npm": "catalog:cli",
+    "vue": "^3.3.0"
+  },
+  "dependencies": {
+    "sugar-high": "catalog:"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:cli",
+    "@antfu/ni": "catalog:cli",
+    "@antfu/utils": "catalog:inlined",
+    "@types/node": "catalog:types",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/test-utils": "catalog:",
+    "bumpp": "catalog:cli",
+    "eslint": "catalog:cli",
+    "eslint-plugin-format": "catalog:",
+    "eslint-plugin-slop": "catalog:cli",
+    "eslint-plugin-sonarjs": "catalog:cli",
+    "happy-dom": "catalog:",
+    "nano-staged": "catalog:cli",
+    "publint": "catalog:cli",
+    "simple-git-hooks": "catalog:cli",
+    "skills-npm": "catalog:cli",
+    "tsx": "catalog:cli",
+    "typescript": "catalog:cli",
+    "vite": "catalog:cli",
+    "vitest": "catalog:testing",
+    "vue": "catalog:",
+    "vue-tsc": "catalog:"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && npx nano-staged"
+  },
+  "nano-staged": {
+    "*": "eslint --fix"
+  }
+}

@@ -1,0 +1,108 @@
+ignoreWorkspaceRootCheck: true
+catalogMode: prefer
+
+minimumReleaseAgeExcludePrune: true
+minimumReleaseAgeExclude:
+  - '@antfu/eslint-config@9.5.1'
+  - eslint-plugin-slop@0.1.3
+  - tsx@4.23.15
+
+# uni-app's dependency tree pins legacy versions (vite 5, rollup 4, plugin-legacy…),
+# which trips `no-downgrade` on every install; keep other supply-chain guards on.
+trustPolicy: off
+trustPolicyExclude:
+  # pinned by @types/node@20, required by vue-tsc
+  - undici-types@6.21.0
+
+update:
+  ignoreDeps:
+    - typescript@7
+
+dangerouslyAllowAllBuilds: true
+shellEmulator: true
+
+packages:
+  - playground
+  - docs
+  - packages/*
+  - examples/*
+
+allowBuilds:
+  esbuild: true
+  simple-git-hooks: true
+
+catalog:
+  '@dcloudio/types': ^3.4.8
+  '@dcloudio/uni-app': 3.0.0-5020420260813003
+  '@dcloudio/uni-app-harmony': 3.0.0-5020420260813003
+  '@dcloudio/uni-app-plus': 3.0.0-5020420260813003
+  '@dcloudio/uni-automator': 3.0.0-5020420260813003
+  '@dcloudio/uni-cli-shared': 3.0.0-5020420260813003
+  '@dcloudio/uni-components': 3.0.0-5020420260813003
+  '@dcloudio/uni-h5': 3.0.0-5020420260813003
+  '@dcloudio/uni-mp-alipay': 3.0.0-5020420260813003
+  '@dcloudio/uni-mp-baidu': 3.0.0-5020420260813003
+  '@dcloudio/uni-mp-harmony': 3.0.0-5020420260813003
+  '@dcloudio/uni-mp-jd': 3.0.0-5020420260813003
+  '@dcloudio/uni-mp-kuaishou': 3.0.0-5020420260813003
+  '@dcloudio/uni-mp-lark': 3.0.0-5020420260813003
+  '@dcloudio/uni-mp-qq': 3.0.0-5020420260813003
+  '@dcloudio/uni-mp-toutiao': 3.0.0-5020420260813003
+  '@dcloudio/uni-mp-weixin': 3.0.0-5020420260813003
+  '@dcloudio/uni-mp-xhs': 3.0.0-5020420260813003
+  '@dcloudio/uni-quickapp-webview': 3.0.0-5020420260813003
+  '@dcloudio/uni-stacktracey': 3.0.0-5020420260813003
+  '@dcloudio/vite-plugin-uni': 3.0.0-5020420260813003
+  '@mini-types/alipay': ^3.0.14
+  '@uni-helper/plugin-uni': 0.1.0
+  '@uni-helper/unh': ^0.3.2
+  '@uni-helper/uni-types': ^1.1.0
+  '@vitejs/plugin-vue': ^6.0.3
+  '@vue/runtime-core': 3.4.21
+  '@vue/test-utils': ^2.4.6
+  '@vue/tsconfig': ^0.9.1
+  eslint-plugin-format: ^2.0.1
+  happy-dom: ^19.0.2
+  miniprogram-api-typings: ^5.2.3
+  rollup: 4.14.3
+  sass: 1.64.2
+  sugar-high: ^2.5.0
+  vue: ^3.5.0
+  vue-i18n: 9.6.2
+  vue-router: 4.5.1
+  vue-tsc: ^3.1.5
+
+catalogs:
+  cli:
+    '@antfu/eslint-config': ^9.5.1
+    '@antfu/ni': ^30.6.0
+    bumpp: ^12.3.0
+    eslint: ^10.11.0
+    eslint-plugin-slop: ^0.1.3
+    eslint-plugin-sonarjs: ^4.2.1
+    nano-staged: ^1.0.2
+    publint: ^0.3.24
+    simple-git-hooks: ^2.14.0
+    skills-npm: ^1.2.1
+    tsdown: ^0.23.0
+    tsx: ^4.23.15
+    typescript: ^6.0.3
+    vite: ^8.3.0
+  inlined:
+    '@antfu/utils': ^9.3.0
+  testing:
+    tsdown-stale-guard: ^0.1.3
+    tsnapi: ^1.5.0
+    vitest: ^5.0.1
+  types:
+    '@types/node': ^26.6.2
+  conflicts_vue_3_4_21:
+    vue: 3.4.21
+  conflicts_types_h26_5_1:
+    '@types/node': ^26.5.1
+  conflicts_cli_5_9_3:
+    typescript: 5.9.3
+  conflicts_cli_5_2_8:
+    vite: 5.2.8
+  conflicts_vue-tsc_h3_3_11:
+    vue-tsc: ^3.3.11

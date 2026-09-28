@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "sugar-high": {
+      "source": "huozhi/sugar-high",
+      "sourceType": "github",
+      "skillPath": "skills/sugar-high/SKILL.md",
+      "computedHash": "61770df5f518d1b0cad83e6a89fc2930724b6c7a29142426302a7259c26b3f83"
+    }
+  }
+}
