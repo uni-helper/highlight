@@ -1,7 +1,11 @@
 {
   "name": "@uni-helper/highlight",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "packageManager": "pnpm@12.5.1",
   "description": "Lightweight code highlighting component for uni-app, powered by sugar-high",
   "author": "FliPPeDround <https://github.com/FliPPeDround>",
