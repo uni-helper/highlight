@@ -94,6 +94,13 @@ describe('<Code>', () => {
     expect(keyword.attributes('style')).toContain(darkTheme.colors.keyword)
   })
 
+  it('merges customClass onto the root node', () => {
+    const wrapper = mountCode('const a', { customClass: 'my-code' })
+    expect(wrapper.element.className).toContain('uh-highlight')
+    expect(wrapper.element.className).toContain('uh-highlight--scroll')
+    expect(wrapper.element.className).toContain('my-code')
+  })
+
   it('renders no user-select attribute on text nodes', () => {
     // copy is the caller's job (uni.setClipboardData on the raw code)
     const wrapper = mountCode('const a')

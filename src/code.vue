@@ -24,14 +24,13 @@ interface Props {
    * Defaults to `false`.
    */
   wrap?: boolean
+  /**
+   * Extra class merged onto the root `scroll-view`. On mini-programs an
+   * external `class` only reaches the host node, so page CSS that needs to
+   * target the component root should be passed through this prop instead.
+   */
+  customClass?: string
 }
-
-defineOptions({
-  options: {
-    // merge external class/style into the root scroll-view on mini-programs
-    virtualHost: true,
-  },
-})
 
 const props = withDefaults(defineProps<Props>(), {
   lang: undefined,
@@ -39,6 +38,7 @@ const props = withDefaults(defineProps<Props>(), {
   showLineNumbers: false,
   tabSize: 2,
   wrap: false,
+  customClass: undefined,
 })
 
 const theme = computed(() => resolveTheme(props.theme))
@@ -48,6 +48,12 @@ const lines = computed(() =>
     theme: theme.value,
     tabSize: props.tabSize,
   }),
+)
+
+const rootClass = computed(() =>
+  ['uh-highlight', props.customClass, `uh-highlight--${props.wrap ? 'wrap' : 'scroll'}`]
+    .filter(Boolean)
+    .join(' '),
 )
 
 const rootStyle = computed(() => ({
@@ -82,8 +88,7 @@ function tokenStyle(token: { color?: string }): Record<string, string> {
 
 <template>
   <scroll-view
-    class="uh-highlight"
-    :class="`uh-highlight--${props.wrap ? 'wrap' : 'scroll'}`"
+    :class="rootClass"
     :scroll-x="!props.wrap"
     :style="rootStyle"
   >
@@ -123,15 +128,30 @@ function tokenStyle(token: { color?: string }): Record<string, string> {
 </template>
 
 <style>
+/* 宿主节点上的默认字号：小程序端根节点不再写死 font-size，
+   外部标签 style 里的 font-size/line-height 才能通过继承生效，
+   inline style 也优先于这里的默认值 */
+:host {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .uh-highlight {
   display: block;
   width: 100%;
   box-sizing: border-box;
-  font-size: 13px;
-  line-height: 1.6;
   font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
   -webkit-text-size-adjust: none;
 }
+
+/* H5 / App 上没有宿主节点，默认字号由根类兜底；
+   小程序端不能加，否则会挡住外部 font-size 的继承 */
+/* #ifdef H5 || APP-PLUS */
+.uh-highlight {
+  font-size: 13px;
+  line-height: 1.6;
+}
+/* #endif */
 
 .uh-highlight__line {
   display: block;

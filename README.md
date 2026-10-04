@@ -72,6 +72,14 @@ const snippet = `function greet(name: string) {
 | `showLineNumbers` | `boolean`                                      | `false`   | 渲染行号                                                                                                               |
 | `tabSize`         | `number`                                       | `2`       | 制表符展开的空格数                                                                                                     |
 | `wrap`            | `boolean`                                      | `false`   | 长行自动换行，而不是横向滚动                                                                                           |
+| `customClass`     | `string`                                       |           | 追加到根节点（scroll-view）上的类名；小程序上外部 `class` 只能修饰宿主节点，用它把类名送进组件根节点                   |
+
+### 外部样式
+
+组件根节点是 `scroll-view`，类名 `uh-highlight`，默认字号 13px、行高 1.6。外部样式按平台处理方式不同：
+
+- **H5 / App**：`class` 和 `style` 会直接落到根节点上，可以随意覆盖。
+- **微信小程序**：组件多一层宿主节点（默认 `display: block`）。写在标签上的 `style` 落在宿主节点上，`padding`、背景、边框、`width` 等盒模型属性直接生效；`font-size`、`line-height` 等继承属性会传入组件内部，直接写在 `style` 上即可，未设置时使用默认值。标签上的 `class` 只能修饰宿主节点本身，要触达组件根节点（比如限定滚动区域的 `max-height`）请用 `custom-class` prop。
 
 ### 主题
 

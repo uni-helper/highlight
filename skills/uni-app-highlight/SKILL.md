@@ -43,6 +43,7 @@ import Code from '@uni-helper/highlight'
 | `showLineNumbers` | `boolean`                                      | `false`   | 左侧渲染行号                                    |
 | `tabSize`         | `number`                                       | `2`       | 制表符展开的空格数                              |
 | `wrap`            | `boolean`                                      | `false`   | `true` 长行自动换行；`false` 横向滚动           |
+| `customClass`     | `string`                                       | （无）    | 追加到根节点（scroll-view）上的类名             |
 
 语言规则：接受规范名（`typescript`）、别名（`ts`）和扩展名（`.tsx`），大小写不敏感、点号可省略。未知语言回退到 JavaScript 词法分析器（不会报错）；传 `plaintext` 可完全禁用高亮。用 `lang="diff"` 时，`+`/`-` 行会按主题的 `lineColors` 自动加整行背景。完整语言与别名映射见 sugar-high skill。
 
@@ -103,5 +104,6 @@ const lines = tokenizeToLines('const a = 1', { lang: 'ts', theme: 'dark' })
 
 - 颜色以内联样式呈现，因为小程序上页面样式无法可靠作用到组件内部。改配色用 `theme` prop，不要指望在小程序里用 CSS 覆盖 token 颜色。
 - H5 等支持的平台可以叠加 CSS：组件类名有 `uh-highlight`（根节点是一个 `scroll-view`）、`uh-highlight__line`、`uh-highlight__token`、`uh-highlight__line-number`、`uh-highlight__blank`，以及修饰类 `uh-highlight--wrap` / `uh-highlight--scroll`。节点上还保留了 sugar-high 语义类名（`sh__line`、`sh__token--keyword`、`sh__line--diff-add` 等），定制样式时优先基于语义类名。
-- 组件开启了 `virtualHost`，小程序上外部传入的 `class`/`style` 会合并到根节点上。
+- 组件未开启 `virtualHost`，小程序上组件会多出一层宿主节点（默认 `display: block`）。写在标签上的 `style` 落在宿主节点上：`padding`、`margin`、背景、边框、`width` 等盒模型属性直接生效；`font-size`、`line-height` 等继承属性会传入组件内部，直接写即可。写在标签上的 `class` 只能修饰宿主节点本身；要让类名作用到组件根节点（scroll-view），用 `custom-class` prop 并配合页面级 CSS。
+- 默认字号 13px、行高 1.6：微信小程序上由组件的 `:host` 样式提供，H5 / App 上由根节点类名提供。标签上的 inline style 优先于默认值；组件自身不写死字号，外部设置多少就渲染多少。
 - `wrap` 为 `false`（默认）时根节点是 `scroll-x` 的 scroll-view，长代码横向滚动；外层容器需要给定宽度，否则滚动区域不生效。

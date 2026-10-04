@@ -18,6 +18,12 @@ export interface CodeProps {
   tabSize?: number
   /** Wrap long lines instead of scrolling horizontally */
   wrap?: boolean
+  /**
+   * Extra class merged onto the root `scroll-view`. On mini-programs an
+   * external `class` only reaches the host node, so page CSS that needs to
+   * target the component root should be passed through this prop instead.
+   */
+  customClass?: string
 }
 
 declare const Code: DefineComponent<CodeProps, Record<string, never>, unknown>
