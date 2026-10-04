@@ -12,8 +12,8 @@ export interface CodeToken {
   value: string
   /**
    * Display value safe for the mini-program `<text>` component.
-   * Tabs expand to spaces and space runs become non-breaking spaces,
-   * since consecutive regular spaces collapse on mini-programs.
+   * Tabs expand to spaces and collapsing space runs become non-breaking
+   * spaces, since consecutive regular spaces collapse on mini-programs.
    */
   text: string
   /** Resolved text color, `undefined` falls back to the theme foreground */

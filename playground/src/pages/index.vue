@@ -6,7 +6,6 @@ import { computed, ref } from 'vue'
 
 const isDark = ref(getInitialDark())
 const showLineNumbers = ref(true)
-const selectable = ref(false)
 const wrap = ref(false)
 
 function getInitialDark(): boolean {
@@ -199,7 +198,6 @@ const resolvedSections = computed(() =>
 const options = computed(() => [
   { label: '深色模式', value: isDark.value, toggle: () => (isDark.value = !isDark.value) },
   { label: '显示行号', value: showLineNumbers.value, toggle: () => (showLineNumbers.value = !showLineNumbers.value) },
-  { label: '文本可复制', value: selectable.value, toggle: () => (selectable.value = !selectable.value) },
   { label: '自动换行', value: wrap.value, toggle: () => (wrap.value = !wrap.value) },
 ])
 
@@ -268,7 +266,6 @@ function openGithub() {
           :lang="section.lang"
           :theme="section.theme"
           :show-line-numbers="showLineNumbers"
-          :selectable="selectable"
           :wrap="wrap"
           :tab-size="section.tabSize ?? 2"
         />

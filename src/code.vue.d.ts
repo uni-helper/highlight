@@ -14,8 +14,6 @@ export interface CodeProps {
   theme?: ThemeInput
   /** Render line numbers on the left */
   showLineNumbers?: boolean
-  /** Allow text selection (WeChat mini-program and H5) */
-  selectable?: boolean
   /** Number of spaces a tab expands to */
   tabSize?: number
   /** Wrap long lines instead of scrolling horizontally */

@@ -94,12 +94,11 @@ describe('<Code>', () => {
     expect(keyword.attributes('style')).toContain(darkTheme.colors.keyword)
   })
 
-  it('marks tokens selectable only when asked', () => {
-    const plain = mountCode('const a')
-    expect(plain.find('.uh-highlight__token').attributes('user-select')).toBe('false')
-
-    const selectable = mountCode('const a', { selectable: true })
-    expect(selectable.find('.uh-highlight__token').attributes('user-select')).toBe('true')
+  it('renders no user-select attribute on text nodes', () => {
+    // copy is the caller's job (uni.setClipboardData on the raw code)
+    const wrapper = mountCode('const a')
+    expect(wrapper.find('.uh-highlight__token').attributes('user-select')).toBeUndefined()
+    expect(wrapper.find('.uh-highlight__line').element.textContent).not.toContain(NBSP)
   })
 
   it('scrolls horizontally by default and wraps when `wrap` is set', () => {

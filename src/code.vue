@@ -17,8 +17,6 @@ interface Props {
   theme?: ThemeInput
   /** Render line numbers on the left */
   showLineNumbers?: boolean
-  /** Allow text selection (WeChat mini-program and H5) */
-  selectable?: boolean
   /** Number of spaces a tab expands to */
   tabSize?: number
   /**
@@ -39,7 +37,6 @@ const props = withDefaults(defineProps<Props>(), {
   lang: undefined,
   theme: undefined,
   showLineNumbers: false,
-  selectable: false,
   tabSize: 2,
   wrap: false,
 })
@@ -102,7 +99,6 @@ function tokenStyle(token: { color?: string }): Record<string, string> {
           v-if="showLineNumbers"
           class="uh-highlight__line-number"
           :style="lineNumberStyle"
-          :user-select="selectable"
         >
           {{ lineNumberText(line.index) }}{{ NBSP }}{{ NBSP }}
         </text>
@@ -112,14 +108,12 @@ function tokenStyle(token: { color?: string }): Record<string, string> {
           class="uh-highlight__token"
           :class="token.className"
           :style="tokenStyle(token)"
-          :user-select="selectable"
         >
           {{ token.text }}
         </text>
         <text
           v-if="line.blank"
           class="uh-highlight__blank"
-          :user-select="selectable"
         >
           {{ NBSP }}
         </text>

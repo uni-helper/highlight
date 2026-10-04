@@ -1,6 +1,6 @@
 ---
 name: uni-app-highlight
-description: 在 uni-app（Vue 3）项目中使用 @uni-helper/highlight 实现轻量级代码高亮。当需要在 uni-app 页面或组件中展示、美化代码片段（小程序 / H5 / App），配置高亮主题、行号、自动换行、文本可选，或用 tokenizeToLines 自定义渲染时使用；排查小程序下代码高亮的空格折叠、颜色不生效等问题时也使用。提到 uni-app 代码高亮、代码块组件、sugar-high、@uni-helper/highlight 时，即使用户没有明说"高亮"也应使用。
+description: 在 uni-app（Vue 3）项目中使用 @uni-helper/highlight 实现轻量级代码高亮。当需要在 uni-app 页面或组件中展示、美化代码片段（小程序 / H5 / App），配置高亮主题、行号、自动换行，或用 tokenizeToLines 自定义渲染时使用；排查小程序下代码高亮的空格折叠、颜色不生效等问题时也使用。提到 uni-app 代码高亮、代码块组件、sugar-high、@uni-helper/highlight 时，即使用户没有明说"高亮"也应使用。
 ---
 
 # @uni-helper/highlight
@@ -41,7 +41,6 @@ import Code from '@uni-helper/highlight'
 | `lang`            | `string`                                       | （无）    | 语言名、别名或扩展名，如 `ts`、`.tsx`、`python` |
 | `theme`           | `'light' \| 'dark' \| Partial<HighlightTheme>` | `'light'` | 主题预设或自定义覆盖项                          |
 | `showLineNumbers` | `boolean`                                      | `false`   | 左侧渲染行号                                    |
-| `selectable`      | `boolean`                                      | `false`   | 允许文本选择（微信小程序和 H5）                 |
 | `tabSize`         | `number`                                       | `2`       | 制表符展开的空格数                              |
 | `wrap`            | `boolean`                                      | `false`   | `true` 长行自动换行；`false` 横向滚动           |
 

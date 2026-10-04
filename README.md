@@ -70,7 +70,6 @@ const snippet = `function greet(name: string) {
 | `lang`            | `string`                                       |           | 语言名称、别名或扩展名（如 `ts`、`.tsx`、`python`）。未知语言回退到 JavaScript 词法分析器；使用 `plaintext` 可禁用高亮 |
 | `theme`           | `'light' \| 'dark' \| Partial<HighlightTheme>` | `'light'` | 主题预设或自定义覆盖项                                                                                                 |
 | `showLineNumbers` | `boolean`                                      | `false`   | 渲染行号                                                                                                               |
-| `selectable`      | `boolean`                                      | `false`   | 允许文本选择（微信小程序和 H5）                                                                                        |
 | `tabSize`         | `number`                                       | `2`       | 制表符展开的空格数                                                                                                     |
 | `wrap`            | `boolean`                                      | `false`   | 长行自动换行，而不是横向滚动                                                                                           |
 
@@ -125,7 +124,7 @@ const lines = tokenizeToLines('const a = 1', { lang: 'ts', theme: 'dark' })
 // [{ index, value, tokens: [{ type, value, text, color, className }], className, blank, ... }]
 ```
 
-`text` 字段对小程序是安全的：制表符已展开为空格，连续空格已转换为不换行空格，因为小程序 `<text>` 节点内连续的普通空格会被折叠。
+`text` 字段对小程序是安全的：制表符已展开为空格，连续空格已转换为不换行空格，因为小程序 `<text>` 节点内连续的普通空格会被折叠。 组件不提供长按复制能力；需要复制时由调用方对原始 `code` 调 `uni.setClipboardData` 自行实现。
 
 ## AI Skills
 
