@@ -1,20 +1,20 @@
 import type { TokenType } from 'sugar-high/core'
 
 export interface HighlightTheme {
-  /** Code block background color */
+  /** 代码块背景色 */
   backgroundColor: string
-  /** Default text color, applied to identifiers and whitespace */
+  /** 默认文本颜色，应用于标识符和空白字符 */
   foreground: string
-  /** Text color per token type, missing types fall back to `foreground` */
+  /** 各 token 类型的文本颜色，未指定的类型回退到 `foreground` */
   colors: Partial<Record<TokenType, string>>
   /**
-   * Line background color per line annotation, e.g. `diff-add`
-   * or `markdown-heading` emitted by language presets.
+   * 各行注解对应的行背景色，例如语言预设生成的
+   * `diff-add` 或 `markdown-heading`。
    */
   lineColors: Record<string, string>
 }
 
-/** Official palette from the sugar-high documentation site */
+/** 取自 sugar-high 官方文档站的配色 */
 export const lightTheme: HighlightTheme = {
   backgroundColor: '#ffffff',
   foreground: '#354150',

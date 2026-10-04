@@ -77,7 +77,7 @@ describe('tokenizeToLines', () => {
     expect(indent.type).toBe('space')
     expect(indent.value).toBe('    ')
     expect(indent.text).toBe(NBSP.repeat(4))
-    // single spaces stay copyable
+    // 单个空格保持原样，可正常复制
     const single = tokenizeToLines('a b')[0].tokens[1]
     expect(single.text).toBe(' ')
   })

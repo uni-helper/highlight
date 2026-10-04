@@ -61,7 +61,7 @@ describe('<Code>', () => {
     const lineTokens = wrapper
       .findAll('.uh-highlight__line')
       .map(line => line.findAll('.uh-highlight__token'))
-    // text() trims whitespace, so read raw textContent for NBSP-only tokens
+    // text() 会裁剪空白字符，纯 NBSP 的 token 需要读取原始 textContent
     expect(lineTokens[0][0].element.textContent).toBe(NBSP.repeat(2))
     expect(lineTokens[1][0].element.textContent).toBe(NBSP.repeat(4))
   })
@@ -102,7 +102,7 @@ describe('<Code>', () => {
   })
 
   it('renders no user-select attribute on text nodes', () => {
-    // copy is the caller's job (uni.setClipboardData on the raw code)
+    // 复制由调用方负责（对原始代码调用 uni.setClipboardData）
     const wrapper = mountCode('const a')
     expect(wrapper.find('.uh-highlight__token').attributes('user-select')).toBeUndefined()
     expect(wrapper.find('.uh-highlight__line').element.textContent).not.toContain(NBSP)

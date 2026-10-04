@@ -5,29 +5,29 @@ import { resolveTheme } from './theme'
 import { NBSP, tokenizeToLines } from './tokenize'
 
 interface Props {
-  /** Source code to highlight */
+  /** 需要高亮的源代码 */
   code: string
   /**
-   * Language name, alias, or extension, e.g. `ts`, `.tsx`, `python`.
-   * Unknown names fall back to the JavaScript lexer. Use `plaintext`
-   * to disable highlighting.
+   * 语言名称、别名或扩展名，例如 `ts`、`.tsx`、`python`。
+   * 未知的名称会回退到 JavaScript 解析器。
+   * 使用 `plaintext` 可禁用高亮。
    */
   lang?: string
-  /** `'light'`, `'dark'`, or a partial theme object */
+  /** `'light'`、`'dark'` 或部分主题对象 */
   theme?: ThemeInput
-  /** Render line numbers on the left */
+  /** 在左侧渲染行号 */
   showLineNumbers?: boolean
-  /** Number of spaces a tab expands to */
+  /** 制表符展开后的空格数 */
   tabSize?: number
   /**
-   * Wrap long lines instead of scrolling horizontally.
-   * Defaults to `false`.
+   * 长行换行显示而不是横向滚动。
+   * 默认为 `false`。
    */
   wrap?: boolean
   /**
-   * Extra class merged onto the root `scroll-view`. On mini-programs an
-   * external `class` only reaches the host node, so page CSS that needs to
-   * target the component root should be passed through this prop instead.
+   * 追加到根节点 `scroll-view` 上的额外 class。小程序端外部传入的
+   * `class` 只能作用到宿主节点，页面样式若需要选中组件根节点，
+   * 应改用这个 prop 传入。
    */
   customClass?: string
 }

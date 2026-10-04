@@ -8,17 +8,17 @@ export type { HighlightTheme, ThemeInput } from './theme'
 
 export interface CodeToken {
   type: TokenType
-  /** Raw token value */
+  /** token 的原始文本 */
   value: string
   /**
-   * Display value safe for the mini-program `<text>` component.
-   * Tabs expand to spaces and collapsing space runs become non-breaking
-   * spaces, since consecutive regular spaces collapse on mini-programs.
+   * 可安全用于小程序 `<text>` 组件的展示文本。
+   * 制表符展开为空格，连续空格串替换为不换行空格，
+   * 因为小程序端连续的普通空格会被折叠。
    */
   text: string
-  /** Resolved text color, `undefined` falls back to the theme foreground */
+  /** 解析后的文本颜色，`undefined` 表示回退到主题前景色 */
   color?: string
-  /** sugar-high semantic class, e.g. `sh__token--keyword` */
+  /** sugar-high 语义类名，例如 `sh__token--keyword` */
   className: string
 }
 
@@ -26,33 +26,33 @@ export interface CodeLine {
   index: number
   value: string
   tokens: CodeToken[]
-  /** sugar-high semantic classes, e.g. `sh__line sh__line--diff-add` */
+  /** sugar-high 语义类名，例如 `sh__line sh__line--diff-add` */
   className: string
-  /** Line background from a line annotation (diff, markdown) */
+  /** 行注解（diff、markdown）对应的行背景色 */
   backgroundColor?: string
-  /** Fully blank line. Renderers should fill it to keep its height */
+  /** 完全空白的行。渲染时应填充内容以撑起行高 */
   blank: boolean
 }
 
 export interface TokenizeOptions {
-  /** Language name, alias, or extension, e.g. `ts`, `.tsx`, `python` */
+  /** 语言名称、别名或扩展名，例如 `ts`、`.tsx`、`python` */
   lang?: string
   theme?: ThemeInput
-  /** Number of spaces a tab expands to */
+  /** 制表符展开后的空格数 */
   tabSize?: number
 }
 
 export const NBSP = '\u00A0'
 
-/** sugar-high falls back to its JavaScript lexer, with comments and strings */
+/** 未知语言时 sugar-high 回退使用的 JavaScript 解析配置（含注释与字符串规则） */
 const javascriptConfig: ParseOptions = languages.find(
   language => language.id === 'javascript',
 )!.config!
 
 /**
- * Resolve a language name (canonical, alias, extension, with or without a
- * leading dot, any case) to its sugar-high parse config. Unknown names fall
- * back to the JavaScript config, matching the default `highlight()` behavior.
+ * 将语言名称（标准名、别名、扩展名，可带前导点、大小写不限）
+ * 解析为对应的 sugar-high 解析配置。未知名称回退到 JavaScript
+ * 配置，与 `highlight()` 的默认行为一致。
  */
 export function resolveLanguageConfig(lang?: string): ParseOptions {
   if (!lang)
@@ -64,7 +64,7 @@ export function resolveLanguageConfig(lang?: string): ParseOptions {
   return language?.config ?? javascriptConfig
 }
 
-/** Tabs and space runs render unreliably inside mini-program `<text>` nodes */
+/** 制表符和连续空格在小程序 `<text>` 节点内渲染不可靠 */
 function toDisplayText(value: string, tabSize: number): string {
   if (!value)
     return value
@@ -106,9 +106,8 @@ function transformLine(
 }
 
 /**
- * Highlight `code` into per-line render models without touching any DOM,
- * so the result can be rendered by `<view>`/`<text>` nodes on every
- * uni-app platform.
+ * 将 `code` 高亮为逐行的渲染模型，全程不操作 DOM，
+ * 因此结果可以在所有 uni-app 平台上用 `<view>`/`<text>` 节点渲染。
  */
 export function tokenizeToLines(code: string, options?: TokenizeOptions): CodeLine[] {
   const theme = resolveTheme(options?.theme)
